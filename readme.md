@@ -1,6 +1,6 @@
-# Anki Agent
+# Anki Deck Generator
 
-Anki Agent is a Python-based program that scrapes word definitions from WordReference, formats them into Anki-compatible flashcards, and saves them to a text file. The program consists of three main components:
+Anki Deck Generator is a Python-based program that scrapes word definitions from WordReference, formats them into Anki-compatible flashcards, and saves them to a text file. The program consists of three main components:
 
 1. **`scraper.py`**: Scrapes word definitions from WordReference and saves them to a JSON file.
 2. **`generate_anki_cards.py`**: Converts the scraped definitions into Anki-compatible flashcards and saves them to a text file.
@@ -27,7 +27,7 @@ Anki Agent is a Python-based program that scrapes word definitions from WordRefe
 1. Clone or download this repository to your local machine.
 2. Navigate to the project directory:
    ```bash
-   cd anki-agent
+   cd anki-deck-generator
 3. pip install -r requirements.txt
 
 ## How to Use
