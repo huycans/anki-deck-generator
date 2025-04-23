@@ -12,10 +12,10 @@ logging.basicConfig(
 )
 
 
-def scrape_dictionary(word, session):
-    # Replace spaces and single quotes with dashes for the URL
-    word = word.replace(" ", "-").replace("'", "-")
-    url = f"https://www.wordreference.com/fren/{word}"
+def scrape_dictionary(word, session, conversion="fren"):
+    # Replace spaces with %20 for the URL
+    word = word.replace(" ", "%20")
+    url = f"https://www.wordreference.com/{conversion}/{word}"
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:137.0) Gecko/20100101 Firefox/137.0",
         "Accept": "text/html",
@@ -27,7 +27,7 @@ def scrape_dictionary(word, session):
         print(response.status_code)  # Debugging line to check status code
 
         # Decode the response content to handle raw byte data
-        decoded_content = response.content.decode(response.apparent_encoding or "utf-8")
+        decoded_content = response.content.decode("utf-8", errors="replace")
 
         # Parse the HTML
         soup = BeautifulSoup(decoded_content, "html.parser")
@@ -91,14 +91,15 @@ if __name__ == "__main__":
 
     words_file = "words.txt"  # Path to the file containing words
     words_to_lookup = read_words_from_file(words_file)
+    conversion = "fren"  # Convert from French to English
 
     # Use a session to persist headers and cookies
     all_definitions = []
     with requests.Session() as session:
         for word in words_to_lookup:
-            definition = scrape_dictionary(word, session)
+            definition = scrape_dictionary(word, session, conversion)
             all_definitions.append(definition)
-            time.sleep(2)  # Add a delay between requests
+            time.sleep(0.2)  # Add a 200ms delay between requests
 
     # Save all definitions to a single JSON file
     with open(definitions_file, "w", encoding="utf-8") as json_file:
