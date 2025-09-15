@@ -11,8 +11,8 @@ def generate_anki_cards(definitions_file, output_file):
         # Check if the output file already exists
         file_exists = os.path.exists(output_file)
 
-        # Open the output file for appending or writing
-        with open(output_file, "a" if file_exists else "w", encoding="utf-8") as file:
+        # Open the output file for writing (overwrite any existing content)
+        with open(output_file, "w", encoding="utf-8") as file:
             # If the file doesn't exist, write the Anki format header
             if not file_exists:
                 file.write("#separator:tab\n")
@@ -20,7 +20,7 @@ def generate_anki_cards(definitions_file, output_file):
 
             # Process each word and its definitions
             for entry in definitions:
-                word = entry.get("word", "")
+                word = entry.get("word", "").replace("%20", " ")
                 # Combine all HTML definitions and wrap in <table><tbody>...</tbody></table>
                 html_content = (
                     f"<table><tbody>{''.join(entry.get('html', []))}</tbody></table>"

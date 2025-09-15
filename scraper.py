@@ -75,7 +75,7 @@ def read_words_from_file(file_path):
     try:
         with open(file_path, "r", encoding="utf-8") as file:
             content = file.read()
-            words = [word.strip() for word in content.split(",")]
+            words = [word.strip() for word in content.splitlines() if word.strip()]
             return words
     except Exception as e:
         logging.error(f"Error reading words from file: {e}")
