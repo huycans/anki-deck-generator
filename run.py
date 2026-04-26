@@ -1,10 +1,11 @@
+import sys
 import subprocess
 
 
 def run_scraper():
     try:
         print("Running scraper.py...")
-        subprocess.run(["python", "scraper.py"], check=True)
+        subprocess.run([sys.executable, "scraper.py"], check=True)
         print("scraper.py completed successfully.")
     except subprocess.CalledProcessError as e:
         print(f"An error occurred while running scraper.py: {e}")
@@ -14,7 +15,7 @@ def run_scraper():
 def run_generate_anki_cards():
     try:
         print("Running generate_anki_cards.py...")
-        subprocess.run(["python", "generate_anki_cards.py"], check=True)
+        subprocess.run([sys.executable, "generate_anki_cards.py"], check=True)
         print("generate_anki_cards.py completed successfully.")
     except subprocess.CalledProcessError as e:
         print(f"An error occurred while running generate_anki_cards.py: {e}")
